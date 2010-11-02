@@ -8,7 +8,7 @@ CGI::Session Change Log
         Solves taint error for Perl V 5.10.0. All well-written code will have
         been using errstr() to retrieve errors anyway so this change will not
         affect any code which obeys the API. (Peter Kaminsk, Ron Savage, Mark Stosberg)
-	* INTERNAL: Add Test::Differences to Build.PL and Makefile.PL. Remove Test::Pod.
+	* INTERNAL: Test suite improvements. (Ron Savage, Mark Stosberg)
 
 4.44 - Tuesday, September 8, 2009
 	* Note: Not uploaded to CPAN.
