@@ -42,7 +42,7 @@ sub set_error {
     my $message = shift;
     $class = ref($class) || $class;
     no strict 'refs';
-    ${ "$class\::errstr" } = sprintf($message || "", @_);
+    ${ "$class\::errstr" } = $message || "";
     return;
 }
 
