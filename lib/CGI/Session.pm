@@ -1412,13 +1412,13 @@ This library is free software. You can modify and or distribute it under the sam
 =head1 PUBLIC CODE REPOSITORY
 
 You can see what the developers have been up to since the last release by
-checking out the code repository. You can browse the Subversion repository from here:
+checking out the code repository. You can browse the git repository from here:
 
- http://svn.cromedome.net/repos/CGI-Session
+ http://github.com/cromedome/cgi-session/tree/master
 
-Or check it directly with C<svn> from here:
+Or check out the code with:
 
- https://svn.cromedome.net/repos/CGI-Session
+ git clone git://github.com/cromedome/cgi-session.git
 
 =head1 SUPPORT
 
