@@ -170,15 +170,16 @@ sub query {
 
 sub name {
     my $self = shift;
+    my $name = shift;
     
     if (ref $self) {
-        unless ( @_ ) {
+        unless ( defined $name ) {
             return $self->{_NAME} || $CGI::Session::NAME;
         }
-        return $self->{_NAME} = $_[0];
+        return $self->{_NAME} = $name;
     }
     
-    $CGI::Session::NAME = $_[0] if @_;
+    $CGI::Session::NAME = $name if defined $name;
     return $CGI::Session::NAME;
 }
 
