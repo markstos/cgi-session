@@ -524,7 +524,7 @@ Following is the overview of all the available methods accessible via CGI::Sessi
 
 =head2 new( $dsn, $query||$sid, \%dsn_args, \%session_params )
 
-Constructor. Returns new session object, or undef on failure. Error message is accessible through L<errstr() - class method|CGI::Session::ErrorHandler/errstr>. If called on an already initialized session will re-initialize the session based on already configured object. This is only useful after a call to L<load()|/"load">.
+Constructor. Returns new session object, or undef on failure. Error message is accessible through L<errstr() - class method|CGI::Session::ErrorHandler/"errstr()">. If called on an already initialized session will re-initialize the session based on already configured object. This is only useful after a call to L<load()|/"load()">.
 
 Can accept up to three arguments, $dsn - Data Source Name, $query||$sid - query object OR a string representing session id, and finally, \%dsn_args, arguments used by $dsn components.
 
