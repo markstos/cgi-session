@@ -4,6 +4,8 @@ CGI::Session Change Log
     * FIX: Avoid deleting unmatched sessions when calling find() when ip_match is enabled.
         Closes RT#47795. Thanks to m-uchino, Ron Savage, and Mark Stosberg
 
+    * DOCS: UTF8 related documentation was updated. 
+
     * INTERNAL: Avoid calling sprintf() in CGI::Session::ErrorHandler, fixing RT#48733
         Solves taint error for Perl V 5.10.0. All well-written code will have
         been using errstr() to retrieve errors anyway so this change will not
