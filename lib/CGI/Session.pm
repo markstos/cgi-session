@@ -898,14 +898,14 @@ reference to an array, only the named parameters are cleared.
 
 =head2 flush()
 
-Synchronizes data in memory  with the copy serialized by the driver. Call flush() 
+Synchronizes data in memory with the copy serialized by the driver. Call flush()
 if you need to access the session from outside the current session object. You should
-call flush() sometime before your program exits. 
+call flush() sometime before your program exits.
 
 As a last resort, CGI::Session will automatically call flush for you just
 before the program terminates or session object goes out of scope. Automatic
 flushing has proven to be unreliable, and in some cases is now required
-in places that worked with CGI::Session 3.x. 
+in places that worked with CGI::Session 3.x.
 
 Always explicitly calling C<flush()> on the session before the
 program exits is recommended. For extra safety, call it immediately after
