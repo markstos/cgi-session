@@ -1227,13 +1227,13 @@ You can minimize the above into:
 
     print $session->header();
 
-It will retrieve the name of the session cookie from C<$session->name()> which defaults to C<$CGI::Session::NAME>. If you want to use a different name for your session cookie, do something like following before creating session object:
+It will retrieve the name of the session cookie from C<$session->name()> which defaults to C<$CGI::Session::NAME>. If you want to use a different name for your session cookie, do something like this before creating session object:
 
     CGI::Session->name("MY_SID");
     $session = CGI::Session->new(undef, $cgi, \%attrs);
 
-Now, $session->header() uses "MY_SID" as a name for the session cookie. For all additional options that can
-be passed, see the C<header()> docs in C<CGI>. 
+Now, $session->header() uses "MY_SID" as the name for the session cookie. For all additional options that can
+be passed, see the C<header()> docs in C<CGI>.
 
 =head2 query()
 
@@ -1368,21 +1368,49 @@ at object destruction time.
 
 =head1 A Warning about UTF8
 
-Trying to use UTF8 in a program which uses CGI::Session has lead to problems. See RT#21981 and RT#28516.
+You are strongly encouraged to refer to, at least, the first of these articles, for help with UTF8.
 
-In the first case the user tried "use encoding 'utf8';" in the program, and in the second case the user tried
-"$dbh->do(qq|set names 'utf8'|);".
+L<http://en.wikibooks.org/wiki/Perl_Programming/Unicode_UTF-8>
 
-Until this problem is understood and corrected, users are advised to avoid UTF8 in conjunction with CGI::Session.
+L<http://perl.bristolbath.org/blog/lyle/2008/12/giving-cgiapplication-internationalization-i18n.html>
 
-For details, see: http://rt.cpan.org/Public/Bug/Display.html?id=28516 (and ...id=21981).
+L<http://metsankulma.homelinux.net/cgi-bin/l10n_example_4/main.cgi>
 
-Lastly, note that parameters such as 'utf-8' can be passed to the C<header()> method
-when C<header()> is used to send a cookie. E.g.:
+L<http://rassie.org/archives/247>
 
-	print $session->header(charset => 'utf-8');
+L<http://www.di-mgt.com.au/cryptoInternational2.html>
 
-See L</header()> for a fuller discussion of the use of the C<header()> method in conjunction with cookies.
+Briefly, these are the issues:
+
+=over 4
+
+=item The file containing the source code of your program
+
+Consider "use utf8;" or "use encoding 'utf8';".
+
+=item Influencing the encoding of the program's input
+
+Use:
+
+    binmode STDIN, ":encoding(utf8)";.
+
+    Of course, the program can get input from other sources, e.g. HTML template files, not just STDIN.
+
+=item Influencing the encoding of the program's output
+
+Use:
+
+    binmode STDOUT, ":encoding(utf8)";
+
+    When using CGI.pm, you can use $q->charset('UTF-8'). This is the same as passing 'UTF-8' to CGI's C<header()> method.
+
+    Alternately, when using CGI::Session, you can use $session->header(charset => 'utf-8'), which will be
+    passed to the query object's C<header()> method. Clearly this is preferable when the query object might not be
+    of type CGI.
+
+    See L</header()> for a fuller discussion of the use of the C<header()> method in conjunction with cookies.
+
+=back
 
 =head1 TRANSLATIONS
 
@@ -1390,7 +1418,7 @@ This document is also available in Japanese.
 
 =over 4
 
-=item o 
+=item o
 
 Translation based on 4.14: http://digit.que.ne.jp/work/index.cgi?Perldoc/ja
 
@@ -1406,7 +1434,7 @@ CGI::Session evolved to what it is today with the help of following developers. 
 
 =over 4
 
-=item Andy Lester 
+=item Andy Lester
 
 =item Brian King E<lt>mrbbking@mac.comE<gt>
 
@@ -1416,7 +1444,7 @@ CGI::Session evolved to what it is today with the help of following developers. 
 
 =item Igor Plisco E<lt>igor@plisco.ruE<gt>
 
-=item Mark Stosberg 
+=item Mark Stosberg
 
 =item Matt LeBlanc E<lt>mleblanc@cpan.orgE<gt>
 
