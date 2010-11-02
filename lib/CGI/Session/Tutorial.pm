@@ -346,7 +346,7 @@ One way to help with this is by also checking that the IP address that the sessi
 
 If you have an application where you are sure your users' IPs are constant during a session, you can consider enabling an option to make this check:
 
-    use CGI::Session ( '-ip_match' );
+    use CGI::Session '-ip_match';
 
 For backwards compatibility, you can also achieve this by setting $CGI::Session::IP_MATCH to a true value.  This makes sure that before initializing a previously stored session, it checks if the ip address stored in the session matches the ip address of the user asking for that session. In which case the library returns the session, otherwise it dies with a proper error message.
 

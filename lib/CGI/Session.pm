@@ -135,7 +135,7 @@ sub _id_generator   {
     return $self->{_OBJECTS}->{id} = "CGI::Session::ID::" . $self->{_DSN}->{id};
 }
 
-sub _ip_matches {
+sub ip_matches {
   return ( $_[0]->{_DATA}->{_SESSION_REMOTE_ADDR} eq $ENV{REMOTE_ADDR} );
 }
 
@@ -440,10 +440,12 @@ sub find {
         return $class->set_error( "find(): couldn't create driver object. " . $pm->errstr );
     }
 
-    my $dont_update_atime = 0;
+    # Read-only isn't the perfect name here. In read-only mode, we skip the ip_match check,
+    # and don't update the atime. We *do* still delete expired sessions and session params.
+    my $read_only = 1;
     my $driver_coderef = sub {
         my ($sid) = @_;
-        my $session = $class->load( $dsn, $sid, $dsn_args, $dont_update_atime );
+        my $session = $class->load( $dsn, $sid, $dsn_args, $read_only );
         unless ( $session ) {
             return $class->set_error( "find(): couldn't load session '$sid'. " . $class->errstr );
         }
@@ -657,7 +659,7 @@ sub load {
         _QUERY      => undef        # query object
     }, $class;
 
-    my ($dsn,$query_or_sid,$dsn_args,$update_atime,$params);
+    my ($dsn,$query_or_sid,$dsn_args,$read_only,$params);
     # load($query||$sid)
     if ( @_ == 1 ) {
         $self->_set_query_or_sid($_[0]);
@@ -665,24 +667,24 @@ sub load {
     # Two or more args passed:
     # load($dsn, $query||$sid)
     elsif ( @_ > 1 ) {
-        ($dsn, $query_or_sid, $dsn_args,$update_atime) = @_;
+        ($dsn, $query_or_sid, $dsn_args,$read_only) = @_;
 
         # Make it backwards-compatible (update_atime is an undocumented key in %$params).
         # In fact, update_atime as a key is not used anywhere in the code as yet.
         # This patch is part of the patch for RT#33437.
-        if ( ref $update_atime and ref $update_atime eq 'HASH' ) {
-            $params = {%$update_atime};
-            $update_atime = $params->{'update_atime'};
+        if ( ref $read_only and ref $read_only eq 'HASH' ) {
+            $params = {%$read_only};
+            $read_only = $params->{'read_only'};
 
             if ($params->{'name'}) {
                 $self->{_NAME} = $params->{'name'};
             }
         }
 
-        # Since $update_atime is not part of the public API
-        # we ignore any value but the one we use internally: 0.
-        if (defined $update_atime and $update_atime ne '0') {
-            return $class->set_error( "Too many arguments to load(). First extra argument was: $update_atime");
+        # Since $read_only is not part of the public API
+        # we ignore any value but the one we use internally: 1.
+        if (defined $read_only and $read_only != '1') {
+            return $class->set_error( "Too many arguments to load(). First extra argument was: $read_only");
          }
 
         if ( defined $dsn ) {      # <-- to avoid 'Uninitialized value...' warnings
@@ -736,20 +738,12 @@ sub load {
         return $self->set_error( "Invalid data structure returned from thaw()" );
     }
 
-    # checking if previous session ip matches current ip
-    if($CGI::Session::IP_MATCH) {
-      unless($self->_ip_matches) {
-        $self->_set_status( STATUS_DELETED );
-        $self->flush;
-        return $self;
-      }
-    }
 
     # checking for expiration ticker
     if ( $self->{_DATA}->{_SESSION_ETIME} ) {
         if ( ($self->{_DATA}->{_SESSION_ATIME} + $self->{_DATA}->{_SESSION_ETIME}) <= time() ) {
             $self->_set_status( STATUS_EXPIRED |    # <-- so client can detect expired sessions
-                                STATUS_DELETED );   # <-- session should be removed from database
+                STATUS_DELETED );                   # <-- session should be removed from database
             $self->flush();                         # <-- flush() will do the actual removal!
             return $self;
         }
@@ -764,9 +758,18 @@ sub load {
     }
     $self->clear(\@expired_params) if @expired_params;
 
-    # We update the atime by default, but if this (otherwise undocoumented)
-    # parameter is explicitly set to false, we'll turn the behavior off
-    if ( ! defined $update_atime ) {
+
+
+    if (not defined $read_only) {
+        # checking if previous session ip matches current ip
+        if($CGI::Session::IP_MATCH) {
+            unless($self->ip_matches) {
+                $self->_set_status( STATUS_DELETED );
+                $self->flush;
+                return $self;
+            }
+        }
+
         $self->{_DATA}->{_SESSION_ATIME} = time();      # <-- updating access time
         $self->_set_status( STATUS_MODIFIED );          # <-- access time modified above
     }
@@ -1067,6 +1070,18 @@ Actually, the above code is nothing but waste. The same effect could've been ach
     $s = CGI::Session->new( $sid );
 
 L<is_empty()|/"is_empty"> is useful only if you wanted to catch requests for expired sessions, and create new session afterwards. See L<is_expired()|/"is_expired"> for an example.
+
+=head2 ip_match()
+
+Returns true if $ENV{REMOTE_ADDR} matches the remote address stored in the session.
+
+If you have an application where you are sure your users' IPs are constant
+during a session, you can consider enabling an option to make this check:
+
+    use CGI::Session '-ip_match';
+
+Usually you don't call ip_match() directly, but by using the above method. It is useful
+only if you want to call it inside of coderef passed to the find() method. 
 
 =head2 delete()
 

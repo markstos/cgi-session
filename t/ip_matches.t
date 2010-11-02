@@ -42,7 +42,7 @@ is($CGI::Session::IP_MATCH,1,'ip_match switched on');
 
 $session->flush;
 ok($session=CGI::Session->new,'create new session');
-ok($session->_ip_matches,'REMOTE_IP matches session');
+ok($session->ip_matches,'REMOTE_IP matches session');
 $session->param('TEST','VALUE');
 is($session->param('TEST'),'VALUE','check param TEST set');
 
@@ -51,7 +51,7 @@ ok($sessionid=$session->id,'store session id');
 $session->flush;
 ok($session=CGI::Session->new($sessionid),'new session - same ip');
 is($session->id,$sessionid,'same session id');
-ok($session->_ip_matches,'REMOTE_IP matches session');
+ok($session->ip_matches,'REMOTE_IP matches session');
 is($session->param('TEST'),'VALUE','check param TEST set');
 
 $session->flush;
