@@ -599,7 +599,7 @@ undef is acceptable as a valid placeholder to any of the above arguments, which 
 =head2 load( $dsn, $query, \%dsn_args, \%session_params )
 
 Accepts the same arguments as new(), and also returns a new session object, or
-undef on failure.  The difference is, L<new()|/"new"> can create a new session if
+undef on failure.  The difference is, L<new()|/"new()"> can create a new session if
 it detects expired and non-existing sessions, but C<load()> does not.
 
 C<load()> is useful to detect expired or non-existing sessions without forcing the library to create new sessions. So now you can do something like this:
@@ -856,7 +856,7 @@ a warning and undef will be returned.
 
 =head2 param_hashref()
 
-B<Deprecated>. Use L<dataref()|/"dataref"> instead.
+B<Deprecated>. Use L<dataref()|/"dataref()"> instead.
 
 =head2 dataref()
 
@@ -875,7 +875,7 @@ Useful for having all session data in a hashref, but too risky to update.
 
 =head2 save_param($query, \@list)
 
-Saves query parameters to session object. In other words, it's the same as calling L<param($name, $value)|/"param"> for every single query parameter returned by C<< $query->param() >>. The first argument, if present, should be either CGI object or any object which can provide param() method. If it's undef, defaults to the return value of L<query()|/"query">, which returns C<< CGI->new >>. If second argument is present and is a reference to an array, only those query parameters found in the array will be stored in the session. undef is a valid placeholder for any argument to force default behavior.
+Saves query parameters to session object. In other words, it's the same as calling L<param($name, $value)|/"param($name)"> for every single query parameter returned by C<< $query->param() >>. The first argument, if present, should be either CGI object or any object which can provide param() method. If it's undef, defaults to the return value of L<query()|/"query()">, which returns C<< CGI->new >>. If second argument is present and is a reference to an array, only those query parameters found in the array will be stored in the session. undef is a valid placeholder for any argument to force default behavior.
 
 =head2 load_param()
 
@@ -928,7 +928,7 @@ Read-only method. Returns the time when the session was first created in seconds
 
 =head2 expire($param, $time)
 
-Sets expiration interval relative to L<atime()|/"atime">.
+Sets expiration interval relative to L<atime()|/"atime()">.
 
 If used with no arguments, returns the expiration interval if it was ever set. If no expiration was ever set, returns undef. For backwards compatibility, a method named C<etime()> does the same thing.
 
@@ -1082,12 +1082,12 @@ during a session, you can consider enabling an option to make this check:
     use CGI::Session '-ip_match';
 
 Usually you don't call ip_match() directly, but by using the above method. It is useful
-only if you want to call it inside of coderef passed to the find() method. 
+only if you want to call it inside of coderef passed to the L<find()|/"find( \&code )"> method. 
 
 =head2 delete()
 
 Sets the objects status to be "deleted".  Subsequent read/write requests on the
-same object will fail.  To physically delete it from the data store you need to call L<flush()>.
+same object will fail.  To physically delete it from the data store you need to call L<flush()|/"flush()">.
 CGI::Session attempts to do this automatically when the object is being destroyed (usually as
 the script exits), but see L<A Warning about Auto-flushing>.
 
@@ -1103,7 +1103,7 @@ The following line, for instance, will remove sessions already expired, but whic
 
     CGI::Session->find( sub {} );
 
-Notice, above \&code didn't have to do anything, because load(), which is called to initialize sessions inside find(), will automatically remove expired sessions. Following example will remove all the objects that are 10+ days old:
+Notice, above \&code didn't have to do anything, because load(), which is called to initialize sessions inside L<find()|/"find( \&code )">, will automatically remove expired sessions. Following example will remove all the objects that are 10+ days old:
 
     CGI::Session->find( \&purge );
     sub purge {
@@ -1184,6 +1184,17 @@ The default value of this hashref is undef.
 
 B<Note:> find() is meant to be convenient, not necessarily efficient. It's best suited in cron scripts.
 
+=head2 name($new_name)
+
+The $new_name parameter is optional. If supplied it sets the query or cookie parameter name to be used.
+
+It defaults to I<$CGI::Session::NAME>, which defaults to I<CGISESSID>.
+
+You are strongly discouraged from using the global variable I<$CGI::Session::NAME>, since it is
+deprecated (as are all global variables) and will be removed in a future version of this module.
+
+Return value: The current query or cookie parameter name.
+
 =head1 MISCELLANEOUS METHODS
 
 =head2 remote_addr()
@@ -1206,7 +1217,7 @@ Returns a dump of the session object. Useful for debugging purposes only.
 
 =head2 header()
 
-A wrapper for L<CGI.pm|CGI>'s header() method. Calling this method
+A wrapper for C<CGI>'s header() method. Calling this method
 is equivalent to something like this:
 
     $cookie = CGI::Cookie->new(-name=>$session->name, -value=>$session->id);
@@ -1222,11 +1233,11 @@ It will retrieve the name of the session cookie from C<$session->name()> which d
     $session = CGI::Session->new(undef, $cgi, \%attrs);
 
 Now, $session->header() uses "MY_SID" as a name for the session cookie. For all additional options that can
-be passed, see the C<header()> docs in L<CGI>. 
+be passed, see the C<header()> docs in C<CGI>. 
 
 =head2 query()
 
-Returns query object associated with current session object. Default query object class is L<CGI.pm|CGI>.
+Returns query object associated with current session object. Default query object class is C<CGI>.
 
 =head2 DEPRECATED METHODS
 
@@ -1243,7 +1254,7 @@ CGI::Session consists of several components such as L<drivers|"DRIVERS">, L<seri
 
 =head2 DRIVERS
 
-Following drivers are included in the standard distribution:
+The following drivers are included in the standard distribution:
 
 =over 4
 
@@ -1267,6 +1278,8 @@ L<sqlite|CGI::Session::Driver::sqlite> - for storing session data in SQLite. Req
 Full name: B<CGI::Session::Driver::sqlite>
 
 =back
+
+Other drivers are available from CPAN.
 
 =head2 SERIALIZERS
 
@@ -1296,7 +1309,7 @@ Full name: B<CGI::Session::Serialize::yaml>
 
 =head2 ID GENERATORS
 
-Following ID generators are available:
+The following ID generators are included in the standard distribution.
 
 =over 4
 
