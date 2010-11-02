@@ -1,6 +1,11 @@
 CGI::Session Change Log
 =====================================================================
 
+    * INTERNAL: Avoid calling sprintf() in CGI::Session::ErrorHandler, fixing RT#48733
+        Solves taint error for Perl V 5.10.0. All well-written code will have
+        been using errstr() to retrieve errors anyway so this change will not
+        affect any code which obeys the API. (Peter Kaminsk, Ron Savage, Mark Stosberg)
+
 4.42 - Wednesday, August 26, 2009
     No code changes.
     * DOCUMENTATION: Fix broken links in documentation and tests. (RT##49020) 
