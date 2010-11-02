@@ -221,7 +221,7 @@ sub flush {
     my $self = shift;
 
     # Would it be better to die or err if something very basic is wrong here? 
-    # I'm trying to address the DESTORY related warning
+    # I'm trying to address the DESTROY related warning
     # from: http://rt.cpan.org/Ticket/Display.html?id=17541
     # return unless defined $self;
 
