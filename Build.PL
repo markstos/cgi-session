@@ -130,7 +130,7 @@ Module::Build -> new
 	dist_author    => 'Sherzod Ruzmetov <sherzodr@cpan.org>',
 	build_requires =>
 	{
-		'Test::Differences' => 0,
+#		'Test::Differences' => 0,
 		'Test::More'        => 0,
 	},
 	requires =>

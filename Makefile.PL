@@ -126,7 +126,7 @@ WriteMakefile(
         'CGI'               => 3.26,
         'Digest::MD5'       => 0,
         'Data::Dumper'      => 0,
-		'Test::Differences' => 0,
+#		'Test::Differences' => 0,
         'Test::More'        => 0,
         'Scalar::Util'      => 0,
     },
