@@ -752,9 +752,11 @@ sub load {
 
     # checking expiration tickers of individuals parameters, if any:
     my @expired_params = ();
-    while (my ($param, $max_exp_interval) = each %{ $self->{_DATA}->{_SESSION_EXPIRE_LIST} } ) {
-        if ( ($self->{_DATA}->{_SESSION_ATIME} + $max_exp_interval) <= time() ) {
-            push @expired_params, $param;
+    if ( $self->{_DATA}->{_SESSION_EXPIRE_LIST} ) {
+        while (my ($param, $max_exp_interval) = each %{ $self->{_DATA}->{_SESSION_EXPIRE_LIST} } ) {
+            if ( ($self->{_DATA}->{_SESSION_ATIME} + $max_exp_interval) <= time() ) {
+                push @expired_params, $param;
+            }
         }
     }
     $self->clear(\@expired_params) if @expired_params;
