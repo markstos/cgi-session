@@ -1,7 +1,4 @@
 package CGI::Session;
-
-# $Id$
-
 use strict;
 use Carp;
 use CGI::Session::ErrorHandler;
