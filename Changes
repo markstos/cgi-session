@@ -1,6 +1,8 @@
 CGI::Session Change Log
 =====================================================================
 
+4.43 - Saturday, December 11, 2010
+
     * FIX: Avoid deleting unmatched sessions when calling find() when ip_match is enabled.
         Closes RT#47795. Thanks to m-uchino, Ron Savage, and Mark Stosberg
 
