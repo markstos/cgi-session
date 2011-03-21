@@ -1,12 +1,10 @@
 package CGI::Session::ID::static;
 
-# $Id$
-
 use strict;
 use Carp ("croak");
 use CGI::Session::ErrorHandler;
 
-$CGI::Session::ID::static::VERSION = '4.43';
+$CGI::Session::ID::static::VERSION = '4.44';
 @::CGI::Session::ID::static::ISA   = qw( CGI::Session::ErrorHandler );
 
 sub generate_id {
@@ -27,7 +25,7 @@ CGI::Session::ID::static - CGI::Session ID Driver for generating static IDs
 =head1 SYNOPSIS
 
     use CGI::Session;
-    $session = CGI::Session->new("id:static", $ENV{REMOTE_ADDR});
+    $session = CGI::Session->new( 'driver:mysql;id:static', $ENV{REMOTE_ADDR}, { Handle => $dbh } );
 
 =head1 DESCRIPTION
 
