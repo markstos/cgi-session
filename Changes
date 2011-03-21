@@ -1,6 +1,8 @@
 CGI::Session Change Log
 =====================================================================
 
+   * DOCS: Clarify docs for static ID generator (oalders)   
+
 4.43 - Saturday, December 11, 2010
 
     * FIX: Avoid deleting unmatched sessions when calling find() when ip_match is enabled.
