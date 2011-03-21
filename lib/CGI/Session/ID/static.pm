@@ -27,6 +27,10 @@ CGI::Session::ID::static - CGI::Session ID Driver for generating static IDs
     use CGI::Session;
     $session = CGI::Session->new("id:static", $ENV{REMOTE_ADDR});
 
+    # with more startup options
+    $session = CGI::Session->new( 'driver:mysql;id:static', $ENV{REMOTE_ADDR},
+        { Handle => $dbh } );
+
 =head1 DESCRIPTION
 
 CGI::Session::ID::static is used to generate consistent, static session
