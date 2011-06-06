@@ -4,7 +4,7 @@ use Carp;
 use CGI::Session::ErrorHandler;
 
 @CGI::Session::ISA      = qw( CGI::Session::ErrorHandler );
-$CGI::Session::VERSION  = '4.43';
+$CGI::Session::VERSION  = '4.44';
 $CGI::Session::NAME     = 'CGISESSID';
 $CGI::Session::IP_MATCH = 0;
 
@@ -801,7 +801,7 @@ sub _load_pluggables {
                        id         => "ID",
                        );
     my $dsn = $self->{_DSN};
-    for my $plug qw(driver serializer id) {
+    for my $plug (qw(driver serializer id)) {
         my $mod_name = $dsn->{ $plug };
         if (not defined $mod_name) {
             $mod_name = $DEFAULT_FOR{ $plug };
