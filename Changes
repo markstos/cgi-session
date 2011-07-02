@@ -1,6 +1,11 @@
 CGI::Session Change Log
 =====================================================================
 
+4.45 - July 1st, 2011
+    No code changes.
+
+   * INTERNAL: Fix packaging problem with 4.44.
+
 4.44 - June 6th, 2011
 
    * FIX: Fix 5.14 compatibility issue (Walt Arstingstall)
