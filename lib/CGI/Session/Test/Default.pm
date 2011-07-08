@@ -11,11 +11,11 @@ our $CURRENT;
 sub ok_later (&;$);
     
 
-$CGI::Session::Test::Default::VERSION = '4.46';
+$CGI::Session::Test::Default::VERSION = '4.47';
 
-=head1 CGI::Session::Test::Default
+=head1 NAME
 
-Run a suite of tests for a given CGI::Session::Driver
+CGI::Session::Test::Default - Run a suite of tests for a given CGI::Session::Driver
 
 =head2 new()
 

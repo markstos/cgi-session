@@ -4,7 +4,7 @@ use Carp;
 use CGI::Session::ErrorHandler;
 
 @CGI::Session::ISA      = qw( CGI::Session::ErrorHandler );
-$CGI::Session::VERSION  = '4.46';
+$CGI::Session::VERSION  = '4.47';
 $CGI::Session::NAME     = 'CGISESSID';
 $CGI::Session::IP_MATCH = 0;
 
@@ -1329,7 +1329,7 @@ L<static|CGI::Session::ID::static> - generates static session ids. B<CGI::Sessio
 
 =head1 A Warning about Auto-flushing
 
-Auto-flushing can be unreliable for the following reasons. Explict flushing
+Auto-flushing can be unreliable for the following reasons. Explicit flushing
 after key session updates is recommended. 
 
 =over 4

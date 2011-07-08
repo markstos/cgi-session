@@ -1,6 +1,11 @@
 CGI::Session Change Log
 =====================================================================
 
+4.47 - July 8th, 2011
+    No code changes.
+
+    * DOCS: minor POD fixes (Rene Mayorga and Nicholas Bamber)
+
 4.46 - July 8th, 2011
     No code changes.
 
