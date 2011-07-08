@@ -137,6 +137,9 @@ WriteMakefile(
 no_index:
     package:
     - CGI::Session::Test::SimpleObjectClass
+    - CGI::Session::Test::Default
+    - OverloadedObjectClass
+    - OverloadedClass
 ",
 );
 

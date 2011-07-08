@@ -1,6 +1,11 @@
 CGI::Session Change Log
 =====================================================================
 
+4.46 - July 8th, 2011
+    No code changes.
+
+    * INTERNAL: More packaging fixes.
+
 4.45 - July 1st, 2011
     No code changes.
 

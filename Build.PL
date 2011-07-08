@@ -142,7 +142,12 @@ Module::Build -> new
 		'Scalar::Util' => 0,
 	},
     no_index => {
-        'package' => [ 'CGI::Session::Test::SimpleObjectClass'],
+        'package' => [ 
+            'CGI::Session::Test::SimpleObjectClass',
+            'CGI::Session::Test::Default',
+            'OverloadedObjectClass',
+            'OverloadedClass',
+        ],
     },
     meta_merge => {
         resources => {

@@ -4,7 +4,7 @@ use strict;
 use diagnostics;
 
 use File::Spec;
-use Test::More qw/no_plan/;
+use Test::More 'no_plan';
 use Env;
 
 require CGI::Session;
@@ -36,7 +36,7 @@ is($session->param('TEST'),'VALUE','TEST param still set');
 
 $session->flush;
 # Testing with ip_match set.
-CGI::Session->import qw/-ip_match/;
+CGI::Session->import('-ip_match');
 
 is($CGI::Session::IP_MATCH,1,'ip_match switched on');
 
