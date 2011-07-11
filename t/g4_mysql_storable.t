@@ -1,7 +1,7 @@
 # $Id$
 
 use strict;
-use diagnostics;
+
 
 my %dsn;
 if (defined $ENV{DBI_DSN} && ($ENV{DBI_DSN} =~ m/^dbi:mysql:/)) {

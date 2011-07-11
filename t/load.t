@@ -1,7 +1,7 @@
 # $Id$
 
 use strict;
-use diagnostics;
+
 
 use Test::More 'no_plan';
 

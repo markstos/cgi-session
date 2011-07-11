@@ -1,7 +1,7 @@
 # $Id: api3_db_file.t,v 1.2 2002/11/22 22:54:41 sherzodr Exp $
 
 use strict;
-use diagnostics;
+
 
 BEGIN { 
     use Test::More;

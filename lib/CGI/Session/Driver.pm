@@ -1,7 +1,7 @@
 package CGI::Session::Driver;
 
 use strict;
-#use diagnostics;
+#
 
 use Carp;
 use CGI::Session::ErrorHandler;
