@@ -1,6 +1,11 @@
 CGI::Session Change Log
 =====================================================================
 
+4.48 - July 11th, 2011
+    No code changes.
+
+    * INTERNAL: quit using "use diagnostics;" to avert some test failures
+
 4.47 - July 8th, 2011
     No code changes.
 
