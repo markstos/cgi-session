@@ -5,7 +5,7 @@ use diagnostics;
 
 use File::Spec;
 
-use Test::More tests => 15;
+use Test::More tests => 19;
 use CGI;
 
 use_ok('CGI::Session');
@@ -43,6 +43,9 @@ is $s2->name, 'itchy', 'constructor new with name for session/cookie key';
 is CGI::Session->name, 'fluffy', 'constructor name not affecting class';
 is $session->name, 'spot', 'constructor on new session not affecting old';
 
+ok $s2->delete, "set session status to deleted";
+ok $s2->flush, "flush session file (testname$$)";
+
 ## test from query
 $s2 = CGI::Session->new(
     'id:static',
@@ -64,3 +67,6 @@ eval {
 };
 
 ok $@, "session in query with default name";
+
+ok $s2->delete, "set session status to deleted";
+ok $s2->flush, "flush session file (2001$$)";

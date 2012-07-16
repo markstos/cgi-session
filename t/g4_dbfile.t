@@ -18,3 +18,6 @@ my $t = CGI::Session::Test::Default->new(
 
 plan tests => $t->number_of_tests;
 $t->run();
+
+unlink File::Spec->catfile($dir_name, 'cgisess.db');
+unlink File::Spec->catfile($dir_name, 'cgisess.db.lck');

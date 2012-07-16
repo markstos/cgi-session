@@ -35,5 +35,6 @@ my($new_id);
     is($new_id, $loaded_id, 'Loaded id matches new id');
     is($s->param('key'), 'value', "'value' recovered ok");
 
+    $s->delete;
     #diag '-' x 20;
 }
