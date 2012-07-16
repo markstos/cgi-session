@@ -1,6 +1,6 @@
 package CGI::Session::Tutorial;
 
-$CGI::Session::Tutorial::VERSION = '4.45';
+$CGI::Session::Tutorial::VERSION = '4.46';
 
 =pod
 

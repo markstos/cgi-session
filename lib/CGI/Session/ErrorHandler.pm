@@ -1,7 +1,7 @@
 package CGI::Session::ErrorHandler;
 
 use strict;
-$CGI::Session::ErrorHandler::VERSION = '4.45';
+$CGI::Session::ErrorHandler::VERSION = '4.46';
 
 my $error_msg = '';
 

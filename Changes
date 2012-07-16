@@ -1,6 +1,10 @@
 CGI::Session Change Log
 =====================================================================
 
+4.46 - Monday, July 16, 2012
+  * FIX: RT#78139 Make sure temporary files are removed after tests
+  * FIX: RT#78139 Add process id to temporary session files
+  * FIX: Add paranthesis around qw()'s, because of Perl 5.14 deprecation
 4.45 - Thursday, February 4, 2010
 	* FIX: Make tests use 't/', or a temp dir, for temp files, not '.'.
 	* NEW: RT#51191. Update store() in CGI::Session::Driver::DBI, CGI::Session::Driver::db_file,
