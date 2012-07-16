@@ -1,8 +1,8 @@
 use strict;
-use diagnostics;
+
 
 use File::Spec;
-use Test::More qw/no_plan/;
+use Test::More 'no_plan';
 use Env;
 
 require CGI::Session;
@@ -48,23 +48,16 @@ diag "2nd id (should match 1st): " . $session->id . " / $ENV{REMOTE_ADDR}";
 is($session->id,$sessionid,'Same session id');
 is($session->param('TEST'),'VALUE','TEST param still set');
 
-# Test with ip_match set.
-
-CGI::Session->import(qw/-ip_match/);
+$session->flush;
+# Testing with ip_match set.
+CGI::Session->import('-ip_match');
 
 is($CGI::Session::IP_MATCH,1,'ip_match switched on');
 
 # Create 3rd session, with 2nd IP address. Get 2nd id.
 
 ok($session=CGI::Session->new,'create new session');
-$save_id_2 = $session->id;
-
-diag "3rd id (new): " . $session->id . " / $ENV{REMOTE_ADDR}";
-
-ok($session->_ip_matches,'REMOTE_IP matches session');
-
-# Save a value.
-
+ok($session->ip_matches,'REMOTE_IP matches session');
 $session->param('TEST','VALUE');
 $session->flush;
 
@@ -80,7 +73,7 @@ $session->flush;
 diag "4th id (should match 3rd): " . $session->id . " / $ENV{REMOTE_ADDR}";
 
 is($session->id,$sessionid,'same session id');
-ok($session->_ip_matches,'REMOTE_IP matches session');
+ok($session->ip_matches,'REMOTE_IP matches session');
 is($session->param('TEST'),'VALUE','check param TEST set');
 
 # Revert to 1st IP address.

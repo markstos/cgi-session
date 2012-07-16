@@ -1,70 +1,55 @@
 CGI::Session Change Log
 =====================================================================
 
-4.46 - Monday, July 16, 2012
-  * FIX: RT#78139 Make sure temporary files are removed after tests
-  * FIX: RT#78139 Add process id to temporary session files
-  * FIX: Add paranthesis around qw()'s, because of Perl 5.14 deprecation
-4.45 - Thursday, February 4, 2010
-	* FIX: Make tests use 't/', or a temp dir, for temp files, not '.'.
-	* NEW: RT#51191. Update store() in CGI::Session::Driver::DBI, CGI::Session::Driver::db_file,
-		CGI::Session::Driver::file, CGI::Session::Driver::mysql and CGI::Session::Driver::postgresql
-		to accept a 4th parameter, $etime.
-		Patch CGI::Session to pass this parameter to the storage mechanism called within flush().
-		Note: The code shipped in this module does not yet make any use of this parameter.
-		Thanx to Pavel V. Rochnyack.
-	* NEW: Call query->can('cookie') before trying to call query->cookie().
-		This means the query object does not have to have a cookie() method.
-		Add corresponding test t/cookie.free.t.
-	* NEW: Add {query_class => 'Some::Class'} to the \%session_params in the calls to new() and load().
-		This determines what class other than CGI is 'require'd in the query() method.
-		The default ('CGI') is to 'require' CGI, as always.
-	* FIX: Fix a bug in parameter validation in load(). This required a corresponding patch to t/load.t.
-	* FIX: Rewrite the part of the POD which discusses UTF8.
-	* FIX: RT#51192. In load(), check the existence of SESSION_EXPIRE_LIST before building
-		the list of expired paramters. Thanx to Pavel V. Rochnyack.
-	* INTERNAL: Add _set_value(), to avoid setting the modified
-		flag when a value being stored into the object is the same as the current value.
-		Note: All objects loaded via a call to load() - either from within the object or by the user -
-		have their access time set, and hence have the modified flag set. This in turn means all such
-		object are written to disk by flush(). This default behaviour has not changed.
-	* INTERNAL: Re-write the DESTROY() method, and its docs.
-	* INTERNAL: Re-write the the query() method, and its docs.
-	* INTERNAL: Re-write the the name() method slightly, and its docs.
-	* INTERNAL: Fix: RT#50232. Add these files: MANIFEST, META.yml, MYMETA.yml. Thanx to Lawrence L. Gilbert.
-	* INTERNAL: Re-work docs (just for CGI::Session) to fix many broken POD links.
-	* INTERNAL: Patch t/session_param_undef.t to use a temporary directory.
-	* INTERNAL: Patch t/bug24285.t and t/flush.t to delete their working directory.
-	* INTERNAL: Patch t/g4_sqlite_storable.t and t/g4_storable.t to use a temporary directory.
+4.49 - Monday, July 16, 2012
+    No code changes
 
-4.44 - Tuesday, September 8, 2009
-	* Note: Not uploaded to CPAN.
-    * Add sub _report_status() to display the status flags within the object. Used for debugging.
-    * Change the parameters to load() so that the 4th parameter is always a hashref (or undef). In the past
-           it could be a scalar, but this scalar was undocumented.
-    * Add a note under load() to explain the previously undocumented 4th parameter to load(), which
-           was a scalar only used internally. Explain that now the 4th parameter to load() must be a hashref (or undef).
-    * Add a note under load() about usage of the global variable $CGI::Session::IP_MATCH, and how it can be
-           set with    use CGI::Session qw/ip_match/.    This was previously only documented in the POD
-           for CGI::Session::Tutorial.
-    * FIX: RT#47795. Fix load() whereby find() can now call load() when $CGI::Session::IP_MATCH is set, and
-           sessions are not deleted just because their IP addresses do not match the client.
-    * Add t/find_ip_matches.t to demonstrate the new behaviour when find() calls load(). The new behaviour
-           is that calling find(), which calls load(), with $CGI::Session::IP_MATCH set to 1, does not
-           delete the sessions whose IP addresses do not match the client's IP address.
+    * FIX: RT#78139 Make sure temporary files are removed after tests
+    * FIX: RT#78139 Add process id to temporary session files
+    * FIX: Add paranthesis around qw()'s, because of Perl 5.14 deprecation
 
-4.43 - Monday, August 31, 2009
-	* Note: Not uploaded to CPAN.
-    * FIX: RT#48733. Avoid calling sprintf() in CGI::Session::ErrorHandler,
-           to solve taint error for Perl V 5.10.0. All well-written code will have
-           been using errstr() to retrieve errors anyway, so this change will not
-           affect any code which obeys the API. (Peter Kaminsk, Ron Savage, Mark Stosberg)
-    * FIX: CGI::Session::Serialize::freezethaw: Change the VERSION line syntax to match the other modules.
-    * FIX: CGI::Session::Driver::db_file: Ditto.
-    * FIX: CGI::Session::Test::Default (Embedded packages): Ditto.
-    * FIX: Make the version number the same in all modules.
-    * FIX: POD to refer to new (git) repository
-    * FIX: Update Changelog.ini
+4.48 - July 11th, 2011
+    No code changes.
+
+    * INTERNAL: quit using "use diagnostics;" to avert some test failures
+
+4.47 - July 8th, 2011
+    No code changes.
+
+    * DOCS: minor POD fixes (Rene Mayorga and Nicholas Bamber)
+
+4.46 - July 8th, 2011
+    No code changes.
+
+    * INTERNAL: More packaging fixes.
+
+4.45 - July 1st, 2011
+    No code changes.
+
+   * INTERNAL: Fix packaging problem with 4.44.
+
+4.44 - June 6th, 2011
+
+   * FIX: Fix 5.14 compatibility issue (Walt Arstingstall)
+   * DOCS: Clarify docs for static ID generator (oalders)   
+
+4.43 - Saturday, December 11, 2010
+
+    * FIX: Avoid deleting unmatched sessions when calling find() when ip_match is enabled.
+        Closes RT#47795. Thanks to m-uchino, Ron Savage, and Mark Stosberg
+
+    * NEW: new public ip_match() method is available, primarily for use with find(). (Ron Savage, Mark Stosberg)
+
+    * DOCS: UTF8 related documentation was updated. 
+
+    * INTERNAL: Don't add _SESSION_EXPIRE_LIST to internal hash unless we need to.
+                RT#51192, Thanks to Pavel V. Rochnyack, Ron Savage, Mark Stosberg
+    * INTERNAL: Avoid calling sprintf() in CGI::Session::ErrorHandler, fixing RT#48733
+        Solves taint error for Perl V 5.10.0. All well-written code will have
+        been using errstr() to retrieve errors anyway so this change will not
+        affect any code which obeys the API. (Peter Kaminsk, Ron Savage, Mark Stosberg)
+    * INTERNAL: The undocumented 4th parameter to load() has changed its meaning.  
+	* INTERNAL: Test suite improvements. (Ron Savage, Mark Stosberg)
 
 4.42 - Wednesday, August 26, 2009
     No code changes.

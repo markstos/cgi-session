@@ -1,9 +1,7 @@
 package CGI::Session::ErrorHandler;
 
 use strict;
-$CGI::Session::ErrorHandler::VERSION = '4.46';
-
-my $error_msg = '';
+$CGI::Session::ErrorHandler::VERSION = '4.49';
 
 =pod
 

@@ -5,7 +5,6 @@ CVS
 pm_to_blib
 docs
 .svn
-.git
 ^cover_db
 ^report
 ^blib
@@ -22,3 +21,5 @@ docs
 ^MYMETA.yml$
 ^MYMETA\.json$
 CGI-Session-*
+^.git/
+.swp$

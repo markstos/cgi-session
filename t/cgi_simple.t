@@ -1,5 +1,5 @@
 use strict;
-use diagnostics;
+
 
 # Test CGI::Simple support in CGI::Session
 use Test::More;

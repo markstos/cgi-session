@@ -1,14 +1,13 @@
 #/usr/bin/perl -w
 
 use strict;
-use diagnostics;
 
 use File::Spec;
 
 use Test::More tests => 19;
 use CGI;
 
-use_ok('CGI::Session');
+use CGI::Session;
 
 my $dir_name = File::Spec->tmpdir();
 
@@ -40,7 +39,7 @@ my $s2 = CGI::Session->new(
 );
 
 is $s2->name, 'itchy', 'constructor new with name for session/cookie key';
-is CGI::Session->name, 'fluffy', 'constructor name not affecting class';
+is( CGI::Session->name, 'fluffy', 'constructor name not affecting class');
 is $session->name, 'spot', 'constructor on new session not affecting old';
 
 ok $s2->delete, "set session status to deleted";

@@ -6,60 +6,73 @@ use Text::Wrap;
 
 # ------------------------------------------------
 
-sub create_changelog_ini {
-    my($error);
+sub create_changelog_ini
+{
+	my($error);
 
-    eval "require Module::Metadata::Changes";
+	eval "require Module::Metadata::Changes";
 
-    if ($@) {
-        $error = $@;
-    }
-    else {
-        # Ensure Changelog.ini is writable.
+	if ($@)
+	{
+		$error = $@;
+	}
+	else
+	{
+		# Ensure Changelog.ini is writable.
 
-        if (-e 'Changelog.ini' && ! -w 'Changelog.ini') {
-            $error = (chmod 0200, 'Changelog.ini' == 0) ? 'Could not make Changelog.ini writable' : '';
-        }
+		if (-e 'Changelog.ini' && ! -w 'Changelog.ini')
+		{
+			$error = (chmod 0200, 'Changelog.ini' == 0) ? 'Could not make Changelog.ini writable' : '';
+		}
 
-        if (! $error) {
-            eval {
-                print "Regenerating Changelog.ini...\n";
+		if (! $error)
+		{
+			eval
+			{
+				print "Regenerating Changelog.ini...\n";
 
-                `ini.report.pl -c -i Changes`;
+				`ini.report.pl -c -i Changes`;
 
-                if (! -e 'Changelog.ini') {
-                    # Warning: Can't use $@ to carry msg out of block(s).
+				if (! -e 'Changelog.ini')
+				{
+					# Warning: Can't use $@ to carry msg out of block(s).
 
-                    $error = 'Failed to generate Changelog.ini';
-                }
-                else {
-                    my(@stat) = stat 'Changelog.ini';
+					$error = 'Failed to generate Changelog.ini';
+				}
+				else
+				{
+					my(@stat) = stat 'Changelog.ini';
 
-                    # Was the file modified in the last 2 seconds?
+					# Was the file modified in the last 2 seconds?
 
-                    if ( (time() - $stat[9]) < 2) {
-                        # Yes. Do nothing.
-                    }
-                    else {
-                        $error = 'Failed to update Changelog.ini';
-                    }
-                }
-            };
+					if ( (time() - $stat[9]) < 2)
+					{
+						# Yes. Do nothing.
+					}
+					else
+					{
+						$error = 'Failed to update Changelog.ini';
+					}
+				}
+			};
 
-            if ($@) {
-                $error = $@;
-            }
-        }
-    }
+			if ($@)
+			{
+				$error = $@;
+			}
+		}
+	}
 
-    # We ignore the precise value of $@ here.
+	# We ignore the precise value of $@ here.
 
-    if ($error) {
-        print "Warning: Module::Metadata::Changes's ini.report.pl failed to generate or update Changelog.ini. \n";
-    }
-    else {
-        print "Changelog.ini generated or updated. \n";
-    }
+	if ($error)
+	{
+		print "Warning: Module::Metadata::Changes's ini.report.pl failed to generate or update Changelog.ini. \n";
+	}
+	else
+	{
+		print "Changelog.ini generated or updated. \n";
+	}
 
 } # End of create_changelog_ini.
 
@@ -107,24 +120,40 @@ print "-" x 40, "\n";
 create_changelog_ini();
 print "-" x 40, "\n";
 
-Module::Build->new (
-    module_name    => 'CGI::Session',
-    license        => 'artistic',
-    dist_abstract  => 'Persistent session data in CGI applications',
-    dist_author    => 'Sherzod Ruzmetov <sherzodr@cpan.org>',
+Module::Build -> new
+(
+	module_name    => 'CGI::Session',
+	license        => 'artistic',
+	dist_abstract  => 'Persistent session data in CGI applications',
+	dist_author    => 'Sherzod Ruzmetov <sherzodr@cpan.org>',
     configure_requires => { 'Module::Build' => 0.38 },
-    build_requires => {
-        'Test::Differences' => 0,
-        'Test::More'        => 0,
-    },
-    requires => {
+	build_requires =>
+	{
+#		'Test::Differences' => 0,
+		'Test::More'        => 0,
+	},
+	requires =>
+	{
         'CGI'          => 3.26,
         'Data::Dumper' => 0,
         'Digest::MD5'  => 0,
         'Scalar::Util' => 0,
     },
     no_index => {
-        'package' => [ 'CGI::Session::Test::SimpleObjectClass'],
+        'package' => [ 
+            'CGI::Session::Test::SimpleObjectClass',
+            'CGI::Session::Test::Default',
+            'OverloadedObjectClass',
+            'OverloadedClass',
+        ],
+    },
+    meta_merge => {
+        resources => {
+            repository => 'http://github.com/cromedome/cgi-session',
+        },
+        keywords => [
+            'session','http',
+        ],
     },
     meta_merge => {
         resources => {
