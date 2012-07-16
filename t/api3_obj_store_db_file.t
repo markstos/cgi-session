@@ -1,5 +1,5 @@
 use strict;
-use diagnostics;
+
 
 use CGI;
 use CGI::Session;

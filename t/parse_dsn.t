@@ -1,5 +1,5 @@
 use strict;
-use diagnostics;
+
 
 # unit tests for parse_dsn
 

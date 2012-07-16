@@ -1,5 +1,5 @@
 use strict;
-use diagnostics;
+
 
 BEGIN { 
     use Test::More tests => 10;

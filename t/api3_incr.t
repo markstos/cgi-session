@@ -1,5 +1,5 @@
 use strict;
-use diagnostics;
+
 
 BEGIN {
     require Test::More;

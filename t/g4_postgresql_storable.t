@@ -1,5 +1,5 @@
 use strict;
-use diagnostics;
+
 
 my %dsn;
 if ($ENV{DBI_DSN} && $ENV{DBI_DSN} =~ m/^dbi:Pg:/) {

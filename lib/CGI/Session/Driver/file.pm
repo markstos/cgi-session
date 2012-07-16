@@ -17,7 +17,8 @@ BEGIN {
 }
 
 @CGI::Session::Driver::file::ISA        = ( "CGI::Session::Driver" );
-$CGI::Session::Driver::file::VERSION    = '4.46';
+$CGI::Session::Driver::file::VERSION    = '4.49';
+>>>>>>> markstos/new
 $FileName                               = "cgisess_%s";
 $NoFlock                                = 0;
 $UMask                                  = 0660;

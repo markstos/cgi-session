@@ -1,5 +1,5 @@
 use strict;
-use diagnostics;
+
 use Data::Dumper;
 
 use CGI;

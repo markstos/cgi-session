@@ -13,7 +13,7 @@ use Carp "croak";
 use CGI::Session::Driver::DBI;
 use DBD::Pg qw(PG_BYTEA PG_TEXT);
 
-$CGI::Session::Driver::postgresql::VERSION = '4.46';
+$CGI::Session::Driver::postgresql::VERSION = '4.49';
 @CGI::Session::Driver::postgresql::ISA     = qw( CGI::Session::Driver::DBI );
 
 

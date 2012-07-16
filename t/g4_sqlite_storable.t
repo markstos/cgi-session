@@ -1,5 +1,5 @@
 use strict;
-use diagnostics;
+
 
 use File::Path;
 use File::Spec;
