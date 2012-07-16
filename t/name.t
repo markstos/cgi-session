@@ -12,7 +12,7 @@ use_ok('CGI::Session');
 
 my $dir_name = File::Spec->tmpdir();
 
-my $session = CGI::Session->new('id:static','testname',{Directory=>$dir_name});
+my $session = CGI::Session->new('id:static','testname'.$$,{Directory=>$dir_name});
 ok($session);
 
 # as class method
@@ -34,7 +34,7 @@ ok(CGI::Session->name eq 'fluffy','instance method did not affect class method')
 ## test interface for setting session/cookie key name CGISESSID.
 my $s2 = CGI::Session->new(
     'id:static',
-    'testname',
+    'testname'.$$,
     { Directory => $dir_name },
     { name => 'itchy' }
 );
@@ -46,18 +46,18 @@ is $session->name, 'spot', 'constructor on new session not affecting old';
 ## test from query
 $s2 = CGI::Session->new(
     'id:static',
-    CGI->new( 'itchy=2001' ),
+    CGI->new( 'itchy=2001'.$$ ),
     { Directory => $dir_name },
     { name => 'itchy' }
 );
 
-is $s2->id, 2001, 'session from query with new name';
+is $s2->id, "2001".$$, 'session from query with new name';
 
 ## should die since it won't find value from query
 eval {
     $s2 = CGI::Session->new(
         'id:static',
-        CGI->new( 'CGISESSID=2001' ),
+        CGI->new( 'CGISESSID=2001'.$$ ),
         { Directory => $dir_name },
         { name => 'itchy' }
     );
