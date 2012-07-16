@@ -112,6 +112,7 @@ Module::Build->new (
     license        => 'artistic',
     dist_abstract  => 'Persistent session data in CGI applications',
     dist_author    => 'Sherzod Ruzmetov <sherzodr@cpan.org>',
+    configure_requires => { 'Module::Build' => 0.38 },
     build_requires => {
         'Test::Differences' => 0,
         'Test::More'        => 0,
