@@ -4,4 +4,6 @@ MYMETA.yml
 _build/
 blib/
 t/sessiondata/
-
+CGI-Session-*
+*.bak
+META.*
