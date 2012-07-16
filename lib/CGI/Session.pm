@@ -1675,7 +1675,7 @@ checking out the code repository. You can browse the git repository from here:
 
  http://github.com/cromedome/cgi-session/tree/master
 
-or check out the code with:
+Or check out the code with:
 
  git clone git://github.com/cromedome/cgi-session.git
 
