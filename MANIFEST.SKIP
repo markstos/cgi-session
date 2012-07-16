@@ -18,8 +18,9 @@ docs
 \.r\d+$
 .*sessiondata.*
 .*cgisess.*
-^MYMETA.yml$
 ^MYMETA\.json$
-CGI-Session-*
+^MYMETA.yml$
 ^.git/
+^.gitignore
 .swp$
+CGI-Session-*

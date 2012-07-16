@@ -1,3 +1,5 @@
+# $Id$
+
 use strict;
 
 
@@ -79,7 +81,7 @@ $t->run();
     eval {
         require CGI::Session::Driver::mysql;
         $obj = CGI::Session::Driver::mysql->new( {Handle=>$dbh} );
-        $obj->table_name('my_sessions');
+        $obj -> table_name('my_sessions');
     };
     is($@,'', 'survived eval');
     is($obj->table_name, 'my_sessions', "setting table name through the table_name() method works");

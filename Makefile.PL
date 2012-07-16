@@ -1,3 +1,5 @@
+# $Id$
+
 use strict;
 use Text::Wrap;
 use File::Spec;
@@ -156,8 +158,8 @@ use strict;
 
 sub postamble {
     return <<'MAKE_TEXT';
-prepare_dist :: metafile manifest dist
-    $(NOECHO) $(NOOP)
+prepare_dist ::	metafile manifest dist
+	$(NOECHO) $(NOOP)
 MAKE_TEXT
 }
 

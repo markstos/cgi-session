@@ -1,5 +1,7 @@
 package CGI::Session::Driver::sqlite;
 
+# $Id$
+
 use strict;
 
 use File::Spec;
@@ -17,14 +19,14 @@ sub init {
     }
 
     $self->SUPER::init() or return;
-
+    
     $self->{Handle}->{sqlite_handle_binary_nulls} = 1;
     return 1;
 }
 
 sub store {
     my $self = shift;
-    my ($sid, $datastr, $etime) = @_;
+    my ($sid, $datastr) = @_;
     return $self->set_error("store(): usage error") unless $sid && $datastr;
 
     my $dbh = $self->{Handle};
@@ -48,10 +50,10 @@ sub store {
 sub DESTROY {
     my $self = shift;
 
-    unless ( defined( $self->{Handle} ) && $self->{Handle}->ping ) {
+    unless ( defined( $self->{Handle} ) && $self->{Handle} -> ping ) {
         $self->set_error(__PACKAGE__ . '::DESTROY(). Database handle has gone away');
         return;
-    }
+	}
 
     unless ( $self->{Handle}->{AutoCommit} ) {
         $self->{Handle}->commit;

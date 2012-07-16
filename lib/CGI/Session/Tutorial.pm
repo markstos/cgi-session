@@ -1,5 +1,7 @@
 package CGI::Session::Tutorial;
 
+# $Id$
+
 $CGI::Session::Tutorial::VERSION = '4.49';
 
 =pod
@@ -346,9 +348,7 @@ If you have an application where you are sure your users' IPs are constant durin
 
     use CGI::Session '-ip_match';
 
-For backwards compatibility, you can also achieve this by setting $CGI::Session::IP_MATCH to a true value.  This makes sure that before initializing a previously stored session, it checks if the ip address stored in the session matches the ip address of the user asking for that session. In which case the library returns the session, otherwise it deletes the object.
-
-This is explained more clearly in the POD for CGI::Session, in the section which discusses load().
+For backwards compatibility, you can also achieve this by setting $CGI::Session::IP_MATCH to a true value.  This makes sure that before initializing a previously stored session, it checks if the ip address stored in the session matches the ip address of the user asking for that session. In which case the library returns the session, otherwise it dies with a proper error message.
 
 =head1 LICENSING
 

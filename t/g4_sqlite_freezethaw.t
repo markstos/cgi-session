@@ -1,3 +1,5 @@
+# $Id$
+
 use strict;
 
 
@@ -6,17 +8,15 @@ use Test::More;
 use CGI::Session::Test::Default;
 
 for ( "DBI", "DBD::SQLite", "FreezeThaw", "MIME::Base64" ) {
-    eval "require $_";
+    eval "require $_"; 
     if ( $@ ) {
         plan(skip_all=>"$_ is NOT available");
         exit(0);
     }
 }
 
-my $dir_name = File::Spec->tmpdir;
-
 my %dsn = (
-    DataSource  => "dbi:SQLite:dbname=" . File::Spec->catfile($dir_name, 'sessions.sqlt'),
+    DataSource  => "dbi:SQLite:dbname=" . File::Spec->catfile('t', 'sessiondata', 'sessions.sqlt'),
     TableName   => 'sessions'
 );
 

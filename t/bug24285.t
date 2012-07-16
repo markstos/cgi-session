@@ -8,8 +8,6 @@ use CGI::Session;
 use CGI::Session::Driver;
 use CGI::Session::Driver::file;
 
-my($dir_name) = File::Spec->catdir('t', 'sessiondata');
-
 my $opt_dsn;
 my $id;
 my $file_name;

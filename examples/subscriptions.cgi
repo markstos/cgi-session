@@ -1,5 +1,7 @@
 #!/usr/bin/perl -w
 
+# $Id$
+
 use strict;
 use CGI;
 use CGI::Carp 'fatalsToBrowser';
@@ -454,3 +456,6 @@ P {
 
 CSS
 }
+
+
+# $Id$

@@ -1,5 +1,7 @@
 #!/usr/bin/perl
 
+# $Id$
+
 #
 # This script can be installed as a cron-job to run at specific intervals
 # to remove all expired session data from disk

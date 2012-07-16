@@ -1,5 +1,7 @@
 package CGI::Session::ErrorHandler;
 
+# $Id$
+
 use strict;
 $CGI::Session::ErrorHandler::VERSION = '4.49';
 
@@ -31,9 +33,7 @@ CGI::Session::ErrorHandler provides set_error() and errstr() methods for setting
 
 =item set_error($message)
 
-Stores the error message in a package-scoped lexical variable which can be retrieved by calling errstr() [or it's alias error()].
-
-Return value is B<always> undef.
+Implicitly defines $pkg_name::errstr and sets its value to $message. Return value is B<always> undef.
 
 =cut
 
@@ -46,21 +46,15 @@ sub set_error {
     return;
 }
 
-
 =item errstr()
 
-Returns whatever value was set by the most recent call to set_error(). If no message has been set yet, the empty string is returned so the message can still concatenate without a warning. 
-
-Each call to errstr() resets the package-scoped lexical variable (holding the last error message) to the empty string.
+Returns whatever value was set by the most recent call to set_error(). If no message as has been set yet, the empty string is returned so the message can still concatenate without a warning. 
 
 =back
 
 =cut 
 
-# Declare error() to be an alias for errstr().
-
 *error = \&errstr;
-
 sub errstr {
     my $class = shift;
     $class = ref( $class ) || $class;
@@ -68,7 +62,6 @@ sub errstr {
     no strict 'refs';
     return ${ "$class\::errstr" } || '';
 }
-
 
 =head1 LICENSING
 

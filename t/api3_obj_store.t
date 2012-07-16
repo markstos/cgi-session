@@ -1,3 +1,5 @@
+# $Id: api3_obj_store.t,v 1.3 2002/11/22 22:54:41 sherzodr Exp $
+
 use strict;
 
 use Data::Dumper;

@@ -1,3 +1,5 @@
+# $Id: Build.PL 336 2006-10-26 02:17:31Z markstos $
+
 use strict;
 
 use File::Spec;
@@ -135,10 +137,10 @@ Module::Build -> new
 	requires =>
 	{
         'CGI'          => 3.26,
-        'Data::Dumper' => 0,
-        'Digest::MD5'  => 0,
-        'Scalar::Util' => 0,
-    },
+		'Data::Dumper' => 0,
+		'Digest::MD5'  => 0,
+		'Scalar::Util' => 0,
+	},
     no_index => {
         'package' => [ 
             'CGI::Session::Test::SimpleObjectClass',
@@ -155,12 +157,4 @@ Module::Build -> new
             'session','http',
         ],
     },
-    meta_merge => {
-        resources => {
-            repository => 'http://github.com/cromedome/cgi-session',
-        },
-        keywords => [
-            'session','http',
-        ],
-    },
-)->create_build_script();
+) -> create_build_script();

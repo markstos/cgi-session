@@ -1,4 +1,3 @@
-use File::Path;
 use File::Spec;
 use Test::More qw/no_plan/;
 use strict;
