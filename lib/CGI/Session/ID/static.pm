@@ -5,7 +5,7 @@ use strict;
 use Carp 'croak';
 use CGI::Session::ErrorHandler;
 
-$CGI::Session::ID::static::VERSION = '4.44';
+$CGI::Session::ID::static::VERSION = '4.49';
 
 sub generate_id {
     my ($self, $args, $claimed_id ) = @_;

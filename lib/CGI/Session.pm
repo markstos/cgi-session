@@ -4,7 +4,7 @@ use Carp;
 use CGI::Session::ErrorHandler;
 
 @CGI::Session::ISA      = qw( CGI::Session::ErrorHandler );
-$CGI::Session::VERSION  = '4.48';
+$CGI::Session::VERSION  = '4.49';
 $CGI::Session::NAME     = 'CGISESSID';
 $CGI::Session::IP_MATCH = 0;
 
@@ -681,7 +681,7 @@ sub load {
 
         # Since $read_only is not part of the public API
         # we ignore any value but the one we use internally: 1.
-        if (defined $read_only and $read_only != '1') {
+        if (defined $read_only and "$read_only" ne '1') {
             return $class->set_error( "Too many arguments to load(). First extra argument was: $read_only");
          }
 
