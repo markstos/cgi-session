@@ -11,7 +11,7 @@ our $CURRENT;
 sub ok_later (&;$);
     
 
-$CGI::Session::Test::Default::VERSION = '4.47';
+$CGI::Session::Test::Default::VERSION = '4.49';
 
 =head1 NAME
 
