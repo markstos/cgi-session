@@ -17,6 +17,7 @@ isa_ok($session, 'CGI::Session', 'new(undef) returns an object which');
 my($id) = $session -> id();
 
 isnt($id, undef, "new(undef)'s session object returns an id which is /not/ undef");
+$session->delete; # Clean up after us; we don't like leaving things in /tmp
 }
 
 {
@@ -28,6 +29,7 @@ isa_ok($session, 'CGI::Session', 'new($q without CGISESSID) returns an object wh
 my($id) = $session -> id();
 
 isnt($id, undef, "new(\$q without CGISESSID)'s session object returns an id which is /not/ undef");
+$session->delete; # Clean up after us; we don't like leaving things in /tmp
 }
 
 {
@@ -42,4 +44,5 @@ isa_ok($session, 'CGI::Session', 'new($q with fake CGISESSID) returns an object 
 my($id) = $session -> id();
 
 isnt($id, undef, "new(\$q with fake CGISESSID)'s session object returns an id which is /not/ undef");
+$session->delete; # Clean up after us; we don't like leaving things in /tmp
 }

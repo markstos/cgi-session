@@ -4,7 +4,7 @@ use Carp;
 use CGI::Session::ErrorHandler;
 
 @CGI::Session::ISA      = qw( CGI::Session::ErrorHandler );
-$CGI::Session::VERSION  = '4.48';
+$CGI::Session::VERSION  = '4.49';
 $CGI::Session::NAME     = 'CGISESSID';
 $CGI::Session::IP_MATCH = 0;
 
@@ -665,7 +665,7 @@ sub load {
     # Two or more args passed:
     # load($dsn, $query||$sid)
     elsif ( @_ > 1 ) {
-        ($dsn, $query_or_sid, $dsn_args,$read_only) = @_;
+        ($dsn, $query_or_sid, $dsn_args, $read_only) = @_;
 
         # Make it backwards-compatible (update_atime is an undocumented key in %$params).
         # In fact, update_atime as a key is not used anywhere in the code as yet.
@@ -681,7 +681,7 @@ sub load {
 
         # Since $read_only is not part of the public API
         # we ignore any value but the one we use internally: 1.
-        if (defined $read_only and $read_only != '1') {
+        if (defined $read_only and $read_only != 1) {
             return $class->set_error( "Too many arguments to load(). First extra argument was: $read_only");
          }
 

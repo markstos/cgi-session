@@ -1,6 +1,11 @@
 CGI::Session Change Log
 =====================================================================
 
+4.49 - July 19th, 2012
+
+    * Fix: RT#78139 Clean up /tmp after tests are run (Salve J. Nilsen)
+    * Fix: RT#78139 Make semi-unique session files (Salve J. Nilsen)
+
 4.48 - July 11th, 2011
     No code changes.
 
