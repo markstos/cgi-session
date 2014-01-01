@@ -1470,11 +1470,11 @@ This library is free software. You can modify and or distribute it under the sam
 You can see what the developers have been up to since the last release by
 checking out the code repository. You can browse the git repository from here:
 
- http://github.com/cromedome/cgi-session/tree/master
+ http://github.com/markstos/cgi-session/tree/master
 
 Or check out the code with:
 
- git clone git://github.com/cromedome/cgi-session.git
+ git clone git://github.com/markstos/cgi-session.git
 
 =head1 SUPPORT
 
