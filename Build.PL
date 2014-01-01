@@ -151,7 +151,7 @@ Module::Build -> new
     },
     meta_merge => {
         resources => {
-            repository => 'http://github.com/cromedome/cgi-session',
+            repository => 'http://github.com/markstos/cgi-session',
         },
         keywords => [
             'session','http',
