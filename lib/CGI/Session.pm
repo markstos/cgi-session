@@ -1226,7 +1226,7 @@ You can minimize the above into:
 
     print $session->header();
 
-It will retrieve the name of the session cookie from C<$session->name()> which defaults to C<$CGI::Session::NAME>. If you want to use a different name for your session cookie, do something like this before creating session object:
+It will retrieve the name of the session cookie from C<< $session->name() >> which defaults to C<$CGI::Session::NAME>. If you want to use a different name for your session cookie, do something like this before creating session object:
 
     CGI::Session->name("MY_SID");
     $session = CGI::Session->new(undef, $cgi, \%attrs);
