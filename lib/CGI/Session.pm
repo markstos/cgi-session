@@ -1470,7 +1470,7 @@ This library is free software. You can modify and or distribute it under the sam
 You can see what the developers have been up to since the last release by
 checking out the code repository. You can browse the git repository from here:
 
- http://github.com/markstos/cgi-session/tree/master
+ http://github.com/markstos/cgi-session
 
 Or check out the code with:
 
