@@ -134,14 +134,13 @@ WriteMakefile(
     ABSTRACT => 'Persistent session data in CGI applications',
     AUTHOR   => 'Sherzod Ruzmetov <sherzodr@cpan.org>',
     clean    => { FILES => [ 't/cgisess.*', 't/sessiondata' ] },
-    EXTRA_META => "
-no_index:
-    package:
-    - CGI::Session::Test::SimpleObjectClass
-    - CGI::Session::Test::Default
-    - OverloadedObjectClass
-    - OverloadedClass
-",
+    META_MERGE => {
+        'no_index' => {'package' => [
+            'CGI::Session::Test::SimpleObjectClass',
+            'CGI::Session::Test::Default',
+            'OverloadedObjectClass',
+            'OverloadedClass',
+    ]}},
 );
 
 #
