@@ -1,5 +1,6 @@
 # $Id$
 
+use 5.006;
 use strict;
 use Text::Wrap;
 use File::Spec;
