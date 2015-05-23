@@ -611,7 +611,7 @@ C<load()> is useful to detect expired or non-existing sessions without forcing t
     }
 
     if ( $s->is_empty ) {
-        $s = $s->new() or die $s->errstr;
+        $s = $s->new() or die CGI::Session->errstr;
     }
 
 Notice: All I<expired> sessions are empty, but not all I<empty> sessions are expired!
@@ -1052,7 +1052,7 @@ Tests whether session initialized using L<load()|/"load"> is to be expired. This
         die "Your session expired. Please refresh";
     }
     if ( $s->is_empty ) {
-        $s = $s->new() or die $s->errstr;
+        $s = $s->new() or die CGI::Session->errstr;
     }
 
 
