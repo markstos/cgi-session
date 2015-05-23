@@ -29,7 +29,7 @@ unless ( $dbh ) {
 }
 
 my %tables = map{ s/['"]//g; ($_, 1) } $dbh->tables();
-unless ( exists $tables{ $dsn{TableName} } ) {
+unless ( exists $tables{ $dsn{TableName} } || exists $tables{ 'main.' . $dsn{TableName} }) {
     unless( $dbh->do(qq|
         CREATE TABLE $dsn{TableName} (
             id CHAR(32) NOT NULL PRIMARY KEY,
