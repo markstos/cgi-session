@@ -9,6 +9,7 @@ docs
 ^report
 ^blib
 ^Build$
+^Build\.bat$
 ^_build
 \.bak$
 \.orig$
@@ -20,4 +21,5 @@ docs
 .*cgisess.*
 ^MYMETA\..*$
 ^.git/
+^\.gitignore
 .swp$
