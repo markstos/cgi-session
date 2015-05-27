@@ -9,6 +9,7 @@ docs
 ^report
 ^blib
 ^Build$
+^Build\.bat$
 ^_build
 \.bak$
 \.orig$
@@ -18,6 +19,7 @@ docs
 \.r\d+$
 .*sessiondata.*
 .*cgisess.*
-^MYMETA.yml$
+^MYMETA\..*$
 ^.git/
+^\.gitignore
 .swp$

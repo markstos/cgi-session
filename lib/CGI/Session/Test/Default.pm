@@ -148,7 +148,7 @@ sub run {
             ok(!$session->is_expired, "session isn't expired yet");
 
             is($session->id,$sid, "session IDs are consistent");
-            ok($session->atime > $session->ctime, "ctime should be older than atime");
+            cmp_ok($session->atime, '>', $session->ctime, "ctime should be older than atime");
             ok(!$session->etime, "etime shouldn't be set yet");
 
             ok( ($session->param) == 3, "session should hold params" );
@@ -366,6 +366,7 @@ sub skip_or_run {
 sub ok { skip_or_run("ok", @_); }
 sub use_ok { skip_or_run("use_ok", @_); }
 sub is { skip_or_run("is", @_); }
+sub cmp_ok { skip_or_run("cmp_ok", @_); }
 
 sub ok_later (&;$) {
     my($code, $name) = @_;
